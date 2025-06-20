@@ -163,8 +163,8 @@ export default function HomepageComponent() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-16">
-        <div className="max-w-4xl mx-auto text-center text-white">
+      <section className="bg-gradient-to-r from-blue-600 w-full flex mx-auto to-blue-500 px-6 py-16">
+        <div className="max-w-4xl mx-auto text-center text-white w-full flex flex-col gay-2">
           <p className="text-sm mb-2 opacity-90 font-semibold">Blog genzet</p>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             The Journal : Design Resources,
@@ -174,7 +174,7 @@ export default function HomepageComponent() {
           <p className="text-lg mb-8 opacity-90">
             Your daily dose of design insights!
           </p>
-          <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="flex items-center justify-center gap-4 mb-8 flex-col md:flex-row md:gap-x-4 md:gap-y-0 gap-y-2">
             <select
               className="bg-white text-blue-600 hover:bg-gray-100 w-48 rounded px-3 py-2"
               value={selectedCategory}
@@ -211,32 +211,34 @@ export default function HomepageComponent() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {articles.map((article) => (
-                <Link href={`/${article.id}`} key={article.id}>
+                <Link href={`/${article.id}`} key={article.id} className="w-full">
                   <Card
                     key={article.id}
-                    className="overflow-hidden border-0 shadow-sm hover:scale-105 transition-all duration-300 hover:cursor-pointer"
+                    className="overflow-hidden border-0 shadow-sm hover:scale-105 transition-all duration-300 hover:cursor-pointer flex flex-col h-full"
                   >
-                    <div className="aspect-video relative">
+                    <div className="aspect-video relative w-full">
                       <Image
                         src={article.imageUrl || "/placeholder.svg"}
                         alt={article.title}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        priority={false}
                       />
                     </div>
-                    <CardContent className="p-6">
+                    <CardContent className="p-4 md:p-6 flex flex-col flex-1">
                       <div className="text-xs text-gray-500 mb-2">
                         {article.category?.name}
                       </div>
-                      <h3 className="font-semibold text-lg mb-3 leading-tight">
+                      <h3 className="font-semibold text-lg mb-3 leading-tight line-clamp-2">
                         {article.title}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                      <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3">
                         {article.content}
                       </p>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 mt-auto">
                         <Badge variant="secondary" className="text-xs">
                           {article.category?.name}
                         </Badge>
